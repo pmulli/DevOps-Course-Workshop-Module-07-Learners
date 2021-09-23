@@ -16,7 +16,6 @@ jobs:
       run: dotnet test
 
     - name: Build the TypeScript code
-      run: npm install
       run: npm run build
 
     - name: Run the linter on the TypeScript code
