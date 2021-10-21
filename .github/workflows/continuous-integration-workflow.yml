@@ -42,4 +42,5 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "devops-m8"
         heroku_email: "paul_mullineux@hotmail.com"
+        usedocker: true
 
