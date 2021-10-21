@@ -11,4 +11,4 @@ RUN dotnet build
 RUN npm ci
 RUN npm run build
 
-ENTRYPOINT dotnet rundotnettemplate
+ENTRYPOINT ["dotnet", "run"]
