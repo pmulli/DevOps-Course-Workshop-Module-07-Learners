@@ -40,6 +40,8 @@ jobs:
 
       - name: Build docker image and push to docker hub
         run: |
+          pwd
+          ls
           docker build --tag pmullineux/dotnettemplate:m8 .
           docker push pmullineux/dotnettemplate:m8
 
