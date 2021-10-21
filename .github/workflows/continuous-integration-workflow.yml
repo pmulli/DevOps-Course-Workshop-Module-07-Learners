@@ -28,3 +28,7 @@ jobs:
     - name: Run the TypeScript tests
       working-directory: ./DotnetTemplate.Web
       run: npm t
+
+    - name: Build docker image and push to docker hub
+      run: docker build --tag pmullineux/dotnettemplate:m8 .
+      run: docker push pmullineux/dotnettemplate:m8
