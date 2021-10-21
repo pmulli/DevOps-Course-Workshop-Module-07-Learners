@@ -37,7 +37,6 @@ jobs:
         docker build --tag pmullineux/dotnettemplate:m8 .
         docker push pmullineux/dotnettemplate:m8
 
-    - uses: actions/checkout@v2
     - uses: akhileshns/heroku-deploy@v3.12.12 
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
