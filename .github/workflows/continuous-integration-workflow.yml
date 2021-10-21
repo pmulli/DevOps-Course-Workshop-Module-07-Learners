@@ -29,18 +29,23 @@ jobs:
       working-directory: ./DotnetTemplate.Web
       run: npm t
 
-    - name: Login to docker
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
+    needs: build
+    if: success() && github.ref == 'refs/heads/main'
+    steps:
+      - name: Login to docker
+        run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-    - name: Build docker image and push to docker hub
-      run: |
-        docker build --tag pmullineux/dotnettemplate:m8 .
-        docker push pmullineux/dotnettemplate:m8
+      - name: Build docker image and push to docker hub
+        run: |
+          docker build --tag pmullineux/dotnettemplate:m8 .
+          docker push pmullineux/dotnettemplate:m8
 
-    - uses: akhileshns/heroku-deploy@v3.12.12 
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "devops-m8"
-        heroku_email: "paul_mullineux@hotmail.com"
-        usedocker: true
-
+      - uses: akhileshns/heroku-deploy@v3.12.12 
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "devops-m8"
+          heroku_email: "paul_mullineux@hotmail.com"
+          usedocker: true
